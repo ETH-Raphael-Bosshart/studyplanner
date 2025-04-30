@@ -69,8 +69,26 @@ function startSession() {
     return;
   }
 
+  const plannedHours = parseInt(hoursInput.value.trim());
+
+  if (plannedHours <= 0 || isNaN(plannedHours)) {
+    alert("Please enter a valid number of hours.");
+    return;
+  }
+
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const minutesLeftToday = 1440 - currentMinutes;
+
+  if (plannedHours * 60 > minutesLeftToday) {
+    alert(
+      "Despite your effort, you cannot study this much today — not enough time left."
+    );
+    return;
+  }
+
   studentName = nameInput.value.trim();
-  totalPlannedMinutes = parseInt(hoursInput.value) * 60;
+  totalPlannedMinutes = plannedHours * 60;
 
   document.getElementById("startModal").style.display = "none";
   document.getElementById("mainContent").style.display = "block";
@@ -212,7 +230,7 @@ function editTask(index) {
 
     if (minutesDiff > getAvailableMinutes()) {
       alert("Not enough remaining planned time to increase task.");
-      usedMinutes += oldMinutes; // rollback
+      usedMinutes += oldMinutes;
       return;
     }
 
@@ -247,7 +265,7 @@ function markAsDone(index) {
   renderTasks();
   renderDoneTasks();
   updateRemainingTime();
-  showRandomQuote(); // 🎯
+  showRandomQuote();
 }
 
 function renderDoneTasks() {
@@ -275,7 +293,6 @@ function formatTime(seconds) {
 function updateRemainingTime() {
   const remainingDisplay = document.getElementById("remainingTime");
   const availableMinutes = getAvailableMinutes();
-
   const hours = Math.floor(availableMinutes / 60);
   const minutes = availableMinutes % 60;
   remainingDisplay.textContent = `Remaining Plan: ${hours}h ${minutes}min`;
