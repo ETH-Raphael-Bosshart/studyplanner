@@ -101,9 +101,11 @@ function startSession() {
 function addTask() {
   const taskNameInput = document.getElementById("taskName");
   const taskMinutesInput = document.getElementById("taskMinutes");
+  const taskDescriptionInput = document.getElementById("taskDescription");
 
   const name = taskNameInput.value.trim();
   const minutes = parseInt(taskMinutesInput.value);
+  const description = taskDescriptionInput.value.trim();
 
   if (!name || !minutes || minutes <= 0) {
     alert("Please enter a task name and valid minutes.");
@@ -118,14 +120,20 @@ function addTask() {
   tasks.push({
     name,
     minutes,
+    description,
     remainingSeconds: minutes * 60,
     running: false,
     startTime: null,
+    startTimeFormatted: "",
+    completedTimeFormatted: "",
+    usedMinutes: 0,
   });
+
   usedMinutes += minutes;
 
   taskNameInput.value = "";
   taskMinutesInput.value = "";
+  taskDescriptionInput.value = "";
   renderTasks();
   updateRemainingTime();
 }
@@ -136,15 +144,22 @@ function renderTasks() {
 
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
-    li.className = "list-group-item task-item";
+    li.className = "list-group-item task-item flex-column align-items-start";
 
-    const info = document.createElement("span");
-    info.textContent = `${task.name} - ${task.minutes} min`;
+    const topRow = document.createElement("div");
+    topRow.className =
+      "d-flex w-100 justify-content-between align-items-center";
+
+    const name = document.createElement("span");
+    name.textContent = `${task.name} - ${task.minutes} min`;
 
     const timerDisplay = document.createElement("span");
     timerDisplay.id = `timer-${index}`;
     timerDisplay.className = "ms-3";
     timerDisplay.textContent = formatTime(task.remainingSeconds);
+
+    const buttons = document.createElement("div");
+    buttons.className = "d-flex";
 
     const startButton = createIconButton("fas fa-play", "success", () =>
       startTimer(index)
@@ -159,12 +174,17 @@ function renderTasks() {
       markAsDone(index)
     );
 
-    li.appendChild(info);
-    li.appendChild(timerDisplay);
-    li.appendChild(startButton);
-    li.appendChild(stopButton);
-    li.appendChild(editButton);
-    li.appendChild(doneButton);
+    buttons.append(startButton, stopButton, editButton, doneButton);
+    topRow.append(name, timerDisplay, buttons);
+
+    li.appendChild(topRow);
+
+    if (task.description) {
+      const desc = document.createElement("div");
+      desc.className = "text-muted mt-1 small";
+      desc.textContent = task.description;
+      li.appendChild(desc);
+    }
 
     list.appendChild(li);
   });
@@ -188,6 +208,7 @@ function startTimer(index) {
   const timerElement = document.getElementById(`timer-${index}`);
   task.running = true;
   task.startTime = Date.now();
+  task.startTimeFormatted = new Date().toISOString();
   currentRunningIndex = index;
 
   currentTimerId = setInterval(() => {
@@ -254,10 +275,12 @@ function markAsDone(index) {
     const actualUsedMinutes = Math.round(
       (Date.now() - task.startTime) / 1000 / 60
     );
-    const plannedMinutes = task.minutes;
-    const minutesSaved = Math.max(0, plannedMinutes - actualUsedMinutes);
-
-    usedMinutes -= minutesSaved;
+    task.usedMinutes = actualUsedMinutes;
+    const end = new Date();
+    task.completedTimeFormatted = end.toISOString();
+  } else {
+    task.usedMinutes = 0;
+    task.completedTimeFormatted = new Date().toISOString();
   }
 
   doneTasks.push(task);
@@ -275,7 +298,19 @@ function renderDoneTasks() {
   doneTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "list-group-item";
-    li.textContent = `${task.name} - ${task.minutes} min (Done)`;
+
+    const main = document.createElement("div");
+    main.textContent = `${task.name} - ${task.minutes} min (Done)`;
+
+    li.appendChild(main);
+
+    if (task.description) {
+      const desc = document.createElement("div");
+      desc.className = "text-muted mt-1 small";
+      desc.textContent = task.description;
+      li.appendChild(desc);
+    }
+
     doneList.appendChild(li);
   });
 }
@@ -314,11 +349,19 @@ function downloadSession() {
       Status: "Done",
       Task: task.name,
       Minutes: task.minutes,
+      UsedMinutes: task.usedMinutes || "",
+      StartTime: task.startTimeFormatted || "",
+      CompletedTime: task.completedTimeFormatted || "",
+      Description: task.description || "",
     })),
     ...tasks.map((task) => ({
       Status: "Todo",
       Task: task.name,
       Minutes: task.minutes,
+      UsedMinutes: "",
+      StartTime: "",
+      CompletedTime: "",
+      Description: task.description || "",
     })),
   ];
 

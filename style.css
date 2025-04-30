@@ -175,3 +175,8 @@ button i {
 .list-group-item {
   background-color: white;
 }
+
+.task-item .text-muted {
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
