@@ -6,6 +6,7 @@ let usedMinutes = 0;
 let currentTimerId = null;
 let currentRunningIndex = null;
 let studentName = "";
+let studyChart = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   document
@@ -70,7 +71,6 @@ function startSession() {
   }
 
   const plannedHours = parseInt(hoursInput.value.trim());
-
   if (plannedHours <= 0 || isNaN(plannedHours)) {
     alert("Please enter a valid number of hours.");
     return;
@@ -105,7 +105,7 @@ function addTask() {
 
   const name = taskNameInput.value.trim();
   const minutes = parseInt(taskMinutesInput.value);
-  const description = taskDescriptionInput.value.trim();
+  const description = taskDescriptionInput?.value?.trim() || "";
 
   if (!name || !minutes || minutes <= 0) {
     alert("Please enter a task name and valid minutes.");
@@ -133,7 +133,7 @@ function addTask() {
 
   taskNameInput.value = "";
   taskMinutesInput.value = "";
-  taskDescriptionInput.value = "";
+  if (taskDescriptionInput) taskDescriptionInput.value = "";
   renderTasks();
   updateRemainingTime();
 }
@@ -190,6 +190,29 @@ function renderTasks() {
   });
 }
 
+function renderDoneTasks() {
+  const doneList = document.getElementById("doneList");
+  doneList.innerHTML = "";
+
+  doneTasks.forEach((task) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+
+    const main = document.createElement("div");
+    main.textContent = `${task.name} - ${task.minutes} min (Done)`;
+    li.appendChild(main);
+
+    if (task.description) {
+      const desc = document.createElement("div");
+      desc.className = "text-muted mt-1 small";
+      desc.textContent = task.description;
+      li.appendChild(desc);
+    }
+
+    doneList.appendChild(li);
+  });
+}
+
 function createIconButton(iconClass, color, action) {
   const button = document.createElement("button");
   button.className = `btn btn-${color} btn-sm rounded-pill ms-2`;
@@ -234,36 +257,7 @@ function stopTimer(index) {
   tasks[index].running = false;
 }
 
-function editTask(index) {
-  if (tasks[index].running) {
-    alert("You can't edit a running task. Please stop it first.");
-    return;
-  }
-
-  const newName = prompt("Edit task name:", tasks[index].name);
-  const newMinutes = prompt("Edit planned minutes:", tasks[index].minutes);
-
-  if (newName && newMinutes && !isNaN(newMinutes) && parseInt(newMinutes) > 0) {
-    usedMinutes -= tasks[index].minutes;
-
-    const oldMinutes = tasks[index].minutes;
-    const minutesDiff = parseInt(newMinutes) - oldMinutes;
-
-    if (minutesDiff > getAvailableMinutes()) {
-      alert("Not enough remaining planned time to increase task.");
-      usedMinutes += oldMinutes;
-      return;
-    }
-
-    tasks[index].name = newName.trim();
-    tasks[index].minutes = parseInt(newMinutes);
-    tasks[index].remainingSeconds = tasks[index].minutes * 60;
-    usedMinutes += tasks[index].minutes;
-
-    renderTasks();
-    updateRemainingTime();
-  }
-}
+// Fix: ensure usedMinutes is always populated for marked-as-done tasks
 
 function markAsDone(index) {
   const task = tasks[index];
@@ -276,42 +270,110 @@ function markAsDone(index) {
       (Date.now() - task.startTime) / 1000 / 60
     );
     task.usedMinutes = actualUsedMinutes;
-    const end = new Date();
-    task.completedTimeFormatted = end.toISOString();
+    task.completedTimeFormatted = new Date().toISOString();
+  } else if (task.startTimeFormatted) {
+    // If the task was started and stopped manually
+    const now = new Date();
+    const started = new Date(task.startTimeFormatted);
+    const diffMs = now - started;
+    task.usedMinutes = Math.round(diffMs / 1000 / 60);
+    task.completedTimeFormatted = now.toISOString();
   } else {
+    // Not started at all → usedMinutes stays 0
     task.usedMinutes = 0;
     task.completedTimeFormatted = new Date().toISOString();
   }
 
+  task.running = false;
   doneTasks.push(task);
   tasks.splice(index, 1);
+
   renderTasks();
   renderDoneTasks();
   updateRemainingTime();
   showRandomQuote();
+  renderStats();
+  renderStudyChart();
 }
 
-function renderDoneTasks() {
-  const doneList = document.getElementById("doneList");
-  doneList.innerHTML = "";
+function renderStats() {
+  const statsList = document.getElementById("statsList");
+  statsList.innerHTML = "";
 
-  doneTasks.forEach((task) => {
+  if (doneTasks.length === 0) {
+    statsList.innerHTML = "<li class='text-muted'>No completed tasks yet.</li>";
+    return;
+  }
+
+  const totalDone = doneTasks.length;
+  const totalUsed = doneTasks.reduce(
+    (sum, task) => sum + (task.usedMinutes || 0),
+    0
+  );
+  const avgTime = Math.round(totalUsed / totalDone);
+  const lastTask = doneTasks[doneTasks.length - 1];
+
+  const stats = [
+    `Tasks completed: ${totalDone}`,
+    `Total time studied: ${totalUsed} min`,
+    `Avg. time per task: ${avgTime} min`,
+    `Last task: ${lastTask.name} (${lastTask.usedMinutes || 0} min)`,
+  ];
+
+  stats.forEach((stat) => {
     const li = document.createElement("li");
-    li.className = "list-group-item";
+    li.textContent = stat;
+    statsList.appendChild(li);
+  });
+}
 
-    const main = document.createElement("div");
-    main.textContent = `${task.name} - ${task.minutes} min (Done)`;
+function renderStudyChart() {
+  const ctx = document.getElementById("studyChart").getContext("2d");
 
-    li.appendChild(main);
+  const dataByDay = {};
+  doneTasks.forEach((task) => {
+    if (!task.completedTimeFormatted) return;
+    const date = new Date(task.completedTimeFormatted)
+      .toISOString()
+      .split("T")[0];
+    dataByDay[date] = (dataByDay[date] || 0) + (task.usedMinutes || 0);
+  });
 
-    if (task.description) {
-      const desc = document.createElement("div");
-      desc.className = "text-muted mt-1 small";
-      desc.textContent = task.description;
-      li.appendChild(desc);
-    }
+  const labels = Object.keys(dataByDay).sort();
+  const values = labels.map((date) => (dataByDay[date] / 60).toFixed(2));
 
-    doneList.appendChild(li);
+  if (studyChart) {
+    studyChart.destroy();
+  }
+
+  studyChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Hours Studied",
+          data: values,
+          backgroundColor: "#377E39",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Hours",
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
   });
 }
 
@@ -399,17 +461,23 @@ function loadSessionFile(event) {
     }
 
     sessionData.forEach((item) => {
+      const task = {
+        name: item.Task,
+        minutes: item.Minutes,
+        description: item.Description || "",
+        usedMinutes: item.UsedMinutes || 0,
+        startTimeFormatted: item.StartTime || "",
+        completedTimeFormatted: item.CompletedTime || "",
+        remainingSeconds: item.Minutes * 60,
+        running: false,
+        startTime: null,
+      };
+
       if (item.Status === "Done") {
-        doneTasks.push({ name: item.Task, minutes: item.Minutes });
+        doneTasks.push(task);
       } else if (item.Status === "Todo") {
-        tasks.push({
-          name: item.Task,
-          minutes: item.Minutes,
-          remainingSeconds: item.Minutes * 60,
-          running: false,
-          startTime: null,
-        });
-        usedMinutes += item.Minutes;
+        tasks.push(task);
+        usedMinutes += task.minutes;
       }
     });
 
@@ -421,6 +489,8 @@ function loadSessionFile(event) {
     renderTasks();
     renderDoneTasks();
     updateRemainingTime();
+    renderStats();
+    renderStudyChart();
   };
 
   reader.readAsArrayBuffer(file);

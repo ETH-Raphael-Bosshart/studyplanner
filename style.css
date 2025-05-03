@@ -180,3 +180,18 @@ button i {
   font-size: 0.85rem;
   margin-left: 0.25rem;
 }
+
+#studyChart {
+  max-width: 100%;
+  height: 280px;
+  display: block;
+}
+
+.card canvas {
+  margin-top: 1rem;
+}
+.card {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
