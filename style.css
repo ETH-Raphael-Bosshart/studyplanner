@@ -7,12 +7,12 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   background-color: #f5f8f7;
+  color: #1a1a1a;
   margin: 0;
   padding: 0;
-  color: #1a1a1a;
 }
 
-/* Start Modal Background */
+/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -31,18 +31,18 @@ body {
 }
 
 .modal-content {
-  background: white;
+  background: #fff;
   width: 90%;
   max-width: 500px;
-  transform: translate(-50%, -50%);
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 15px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Container */
+/* Layout Container */
 .container {
   max-width: 900px;
 }
@@ -64,23 +64,25 @@ h4 {
   color: #888;
 }
 
-/* Card Elements */
+/* Card Styling */
 .card {
-  background-color: #ffffff;
+  background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   padding: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Task Items */
 .task-item {
-  background-color: #ffffff;
+  background: #fff;
   border: 1px solid #eee;
   border-radius: 12px;
-  margin-bottom: 1rem;
   padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,7 +96,24 @@ h4 {
   margin-right: 1rem;
 }
 
-/* Action Buttons */
+.task-item .text-muted {
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+
+/* Done Task Styling */
+#doneList li {
+  background-color: #ebf9ec;
+  color: #2c6e3f;
+  border-left: 5px solid var(--main-green);
+  font-weight: 500;
+}
+
+/* Buttons */
+button i {
+  pointer-events: none;
+}
+
 .task-item .btn {
   padding: 0.4rem;
   width: 36px;
@@ -110,31 +129,14 @@ h4 {
   font-size: 1rem;
 }
 
-/* Done Task Styling */
-#doneList li {
-  background-color: #ebf9ec;
-  color: #2c6e3f;
-  border-left: 5px solid var(--main-green);
-  font-weight: 500;
-}
-
-/* Buttons */
+.btn-success,
 .btn-primary {
   background-color: var(--main-green);
   border-color: var(--main-green);
 }
 
+.btn-success:hover,
 .btn-primary:hover {
-  background-color: #2f6b30;
-  border-color: #2f6b30;
-}
-
-.btn-success {
-  background-color: var(--main-green);
-  border-color: var(--main-green);
-}
-
-.btn-success:hover {
   background-color: #2f6b30;
   border-color: #2f6b30;
 }
@@ -168,30 +170,6 @@ h4 {
   background-color: #f1f1f1;
 }
 
-button i {
-  pointer-events: none;
-}
-
 .list-group-item {
-  background-color: white;
-}
-
-.task-item .text-muted {
-  font-size: 0.85rem;
-  margin-left: 0.25rem;
-}
-
-#studyChart {
-  max-width: 100%;
-  height: 280px;
-  display: block;
-}
-
-.card canvas {
-  margin-top: 1rem;
-}
-.card {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
+  background: #fff;
 }
