@@ -10,6 +10,7 @@ let usedMinutes = 0; // Sum of all planned minutes for current tasks
 let currentTimerId = null; // ID of the currently running timer (for setInterval)
 let currentRunningIndex = null; // Index of the currently running task
 let studentName = ""; // Name of the user
+let studyChart = null; // Reference to the bar chart object (Chart.js)
 
 // ==============================
 // WHEN THE PAGE LOADS
@@ -311,47 +312,6 @@ function stopTimer(index) {
   tasks[index].running = false;
 }
 
-function editTask(index) {
-  const task = tasks[index];
-
-  // Prevent editing while the task is running
-  if (task.running) {
-    alert("Please stop the task before editing.");
-    return;
-  }
-
-  // Prompt the user for updated values
-  const newName = prompt("Edit task name:", task.name);
-  const newMinutesInput = prompt("Edit planned minutes:", task.minutes);
-  const newDescription = prompt("Edit description:", task.description || "");
-
-  const newMinutes = parseInt(newMinutesInput);
-
-  // Validate inputs
-  if (!newName || isNaN(newMinutes) || newMinutes <= 0) {
-    alert("Invalid input. Task was not updated.");
-    return;
-  }
-
-  const timeDiff = newMinutes - task.minutes;
-
-  // Check if the new duration would exceed the available remaining plan
-  if (timeDiff > getAvailableMinutes()) {
-    alert("Not enough remaining planned time for this change.");
-    return;
-  }
-
-  // Update task
-  usedMinutes += timeDiff;
-  task.name = newName.trim();
-  task.minutes = newMinutes;
-  task.description = newDescription.trim();
-  task.remainingSeconds = newMinutes * 60;
-
-  renderTasks();
-  updateRemainingTime();
-}
-
 // Fix: ensure usedMinutes is always populated for marked-as-done tasks
 
 function markAsDone(index) {
@@ -423,12 +383,18 @@ function downloadSession() {
       Status: "Done",
       Task: task.name,
       Minutes: task.minutes,
+      UsedMinutes: task.usedMinutes || "",
+      StartTime: task.startTimeFormatted || "",
+      CompletedTime: task.completedTimeFormatted || "",
       Description: task.description || "",
     })),
     ...tasks.map((task) => ({
-      Status: "To-Do",
+      Status: "Todo",
       Task: task.name,
       Minutes: task.minutes,
+      UsedMinutes: "",
+      StartTime: "",
+      CompletedTime: "",
       Description: task.description || "",
     })),
   ];
@@ -438,4 +404,64 @@ function downloadSession() {
   XLSX.utils.book_append_sheet(workbook, worksheet, "StudySession");
 
   XLSX.writeFile(workbook, "StudySession.xlsx");
+}
+
+function loadSessionFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: "array" });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sessionData = XLSX.utils.sheet_to_json(sheet);
+
+    if (
+      sessionData.length === 0 ||
+      (!sessionData[0].Name && !sessionData[0].Status)
+    ) {
+      alert(
+        "Uploaded file has wrong format! It must contain Name, Status, Task, Minutes."
+      );
+      return;
+    }
+
+    if (sessionData[0].Name) {
+      studentName = sessionData[0].Name;
+      document.getElementById("studentName").value = studentName;
+    }
+
+    sessionData.forEach((item) => {
+      const task = {
+        name: item.Task,
+        minutes: item.Minutes,
+        description: item.Description || "",
+        usedMinutes: item.UsedMinutes || 0,
+        startTimeFormatted: item.StartTime || "",
+        completedTimeFormatted: item.CompletedTime || "",
+        remainingSeconds: item.Minutes * 60,
+        running: false,
+        startTime: null,
+      };
+
+      if (item.Status === "Done") {
+        doneTasks.push(task);
+      } else if (item.Status === "Todo") {
+        tasks.push(task);
+        usedMinutes += task.minutes;
+      }
+    });
+
+    document.getElementById("startModal").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+    document.getElementById(
+      "welcomeMessage"
+    ).textContent = `Welcome back, ${studentName}!`;
+    renderTasks();
+    renderDoneTasks();
+    updateRemainingTime();
+  };
+
+  reader.readAsArrayBuffer(file);
 }
