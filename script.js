@@ -312,6 +312,47 @@ function stopTimer(index) {
   tasks[index].running = false;
 }
 
+function editTask(index) {
+  const task = tasks[index];
+
+  // Prevent editing while the task is running
+  if (task.running) {
+    alert("Please stop the task before editing.");
+    return;
+  }
+
+  // Prompt the user for updated values
+  const newName = prompt("Edit task name:", task.name);
+  const newMinutesInput = prompt("Edit planned minutes:", task.minutes);
+  const newDescription = prompt("Edit description:", task.description || "");
+
+  const newMinutes = parseInt(newMinutesInput);
+
+  // Validate inputs
+  if (!newName || isNaN(newMinutes) || newMinutes <= 0) {
+    alert("Invalid input. Task was not updated.");
+    return;
+  }
+
+  const timeDiff = newMinutes - task.minutes;
+
+  // Check if the new duration would exceed the available remaining plan
+  if (timeDiff > getAvailableMinutes()) {
+    alert("Not enough remaining planned time for this change.");
+    return;
+  }
+
+  // Update task
+  usedMinutes += timeDiff;
+  task.name = newName.trim();
+  task.minutes = newMinutes;
+  task.description = newDescription.trim();
+  task.remainingSeconds = newMinutes * 60;
+
+  renderTasks();
+  updateRemainingTime();
+}
+
 // Fix: ensure usedMinutes is always populated for marked-as-done tasks
 
 function markAsDone(index) {
