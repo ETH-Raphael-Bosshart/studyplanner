@@ -91,6 +91,6 @@ This project was created as part of the lecture: *Skills: Programming with Advan
 
 ---
 
-Done by Raphael Philipp Bosshart – for focus, clarity, and growth.
+Done by Raphael Philipp Bosshart.
 
 
