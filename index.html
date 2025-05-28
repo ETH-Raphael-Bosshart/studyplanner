@@ -1,47 +1,68 @@
 <!DOCTYPE html>
+<!-- Declares that this is an HTML5 document -->
 <html lang="en">
   <head>
+    <!-- Character encoding to support most world languages -->
     <meta charset="UTF-8" />
+    <!-- Title shown in the browser tab -->
     <title>Study Task Manager</title>
+    <!-- Makes the site responsive (adapts to mobile, tablet, etc.) -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Loads Bootstrap CSS: used for layout (grid system, cards, buttons, etc.) -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Loads Font Awesome: used for icons like play, checkmark, etc. -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- Links to the CSS file (e.g. for modal styling or custom overrides) -->
     <link rel="stylesheet" href="style.css" />
+    <!-- SheetJS: used to export task data into Excel (.xlsx) -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <!-- Loads same SheetJS library again, but deferred for safer load order -->
     <script
       src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"
       defer
     ></script>
+    <!-- Bootstrap JS for modals, collapses, etc. -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
+    <!-- PapaParse: used to load motivational quotes from CSV -->
     <script
       src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"
       defer
     ></script>
+    <!-- Links custom script file for task logic and app functionality -->
     <script src="script.js" defer></script>
   </head>
+
   <body>
-    <!-- Start Modal -->
+    <!-- Displays the full-screen modal shown on page load -->
     <div id="startModal" class="modal-overlay">
+      <!-- Creates the modal box with padding, rounded corners, shadow, and centered text -->
       <div class="modal-content p-4 rounded shadow text-center">
+        <!-- Shows the welcome headline in bold, green text with bottom margin -->
         <h2 class="mb-4 fw-bold text-success">
           Welcome to Study Task Manager!
         </h2>
+
+        <!-- Shows the instructions to the user -->
         <p>Start your study session by giving the following informations:</p>
+
+        <!-- Creates a text input field for the user’s name with margin below -->
         <input
           id="studentName"
           type="text"
           class="form-control mb-3"
           placeholder="Enter your name"
         />
+
+        <!-- Creates a number input field for planned hours, minimum 1 and maximum 24 -->
         <input
           id="plannedHours"
           type="number"
@@ -50,7 +71,10 @@
           class="form-control mb-3"
           placeholder="Planned hours (max 24)"
         />
+
+        <!-- Wraps the start button in a full-width layout with spacing between rows -->
         <div class="d-grid gap-2">
+          <!-- Creates a large green button to start the session -->
           <button id="startSessionButton" class="btn btn-success btn-lg">
             Start Session
           </button>
@@ -58,7 +82,7 @@
       </div>
     </div>
 
-    <!-- Motivational Quote Modal -->
+    <!-- Defines a Bootstrap modal that shows a motivational quote -->
     <div
       class="modal fade"
       id="quoteModal"
@@ -66,37 +90,56 @@
       aria-labelledby="quoteModalLabel"
       aria-hidden="true"
     >
+      <!-- Centers the modal vertically in the viewport -->
       <div class="modal-dialog modal-dialog-centered">
+        <!-- Styles the modal box with padding -->
         <div class="modal-content p-4">
+          <!-- Creates a header row without a border -->
           <div class="modal-header border-0">
+            <!-- Shows the title text inside the modal -->
             <h5 class="modal-title" id="quoteModalLabel">Motivation Boost!</h5>
+
+            <!-- Adds a close button that dismisses the modal -->
             <button
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
             ></button>
           </div>
+
+          <!-- Creates a centered body area where the quote will be inserted by JavaScript -->
           <div class="modal-body text-center" id="quoteText"></div>
         </div>
       </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Holds the main interface for task management and is hidden by default -->
     <div class="container my-5" id="mainContent" style="display: none">
+      <!-- Creates a flexible layout for the header bar with space between elements -->
       <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Contains the personalized welcome message -->
         <div>
           <h1 class="fw-bold text-success" id="welcomeMessage"></h1>
         </div>
+
+        <!-- Displays the live clock and remaining time aligned to the right -->
         <div class="text-end">
+          <!-- Shows the current time in larger font -->
           <div id="clock" class="fs-5"></div>
+
+          <!-- Shows the remaining planned time in small muted font next to the clock -->
           <div id="remainingTime" class="fs-6 text-muted d-inline"></div>
         </div>
       </div>
 
-      <!-- Task Input -->
+      <!-- Creates a card layout for the task input form -->
       <div class="card p-4 shadow-sm mb-5">
+        <!-- Displays the heading for task creation -->
         <h4 class="mb-3">Add a New Task</h4>
+
+        <!-- Creates a responsive Bootstrap row layout with gap between elements -->
         <div class="row g-3">
+          <!-- Creates a text input for task name taking 5/12 width on medium+ screens -->
           <div class="col-md-5">
             <input
               id="taskName"
@@ -105,6 +148,8 @@
               placeholder="Task Name"
             />
           </div>
+
+          <!-- Creates a number input for planned minutes, with 3/12 width -->
           <div class="col-md-3">
             <input
               id="taskMinutes"
@@ -114,6 +159,8 @@
               placeholder="Planned Minutes"
             />
           </div>
+
+          <!-- Adds a full-width multiline input for an optional task description -->
           <div class="col-12">
             <textarea
               id="taskDescription"
@@ -122,35 +169,46 @@
               placeholder="Description (optional)"
             ></textarea>
           </div>
+
+          <!-- Creates a green rounded button to add the new task -->
           <div class="col-auto">
             <button
               id="addTaskButton"
               class="btn btn-success px-4 rounded-pill mt-2"
             >
+              <!-- Shows a plus icon before the button text -->
               <i class="fas fa-plus"></i> Add Task
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Task Lists -->
+      <!-- Adds a heading for the list of pending tasks -->
       <h4 class="mb-3">To-Do</h4>
+
+      <!-- Creates a styled Bootstrap list that will hold all active tasks -->
       <ul
         id="taskList"
         class="list-group list-group-flush mb-5 shadow-sm rounded"
       ></ul>
 
+      <!-- Adds a heading for the list of completed tasks -->
       <h4 class="mb-3">Done Tasks</h4>
+
+      <!-- Creates a styled list for all completed tasks -->
       <ul
         id="doneList"
         class="list-group list-group-flush mb-5 shadow-sm rounded"
       ></ul>
-      <!-- Export -->
+
+      <!-- Centers the export button below the task lists -->
       <div class="text-center mt-4">
+        <!-- Creates a button to export tasks as Excel, styled with outline and padding -->
         <button
           class="btn btn-outline-success rounded-pill px-4"
           id="downloadSessionButton"
         >
+          <!-- Shows a file export icon before the button text -->
           <i class="fas fa-file-export me-2"></i>Download Session Summary
         </button>
       </div>

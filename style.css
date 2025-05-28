@@ -1,70 +1,106 @@
+/* ======================
+   ROOT VARIABLES
+   ====================== */
+
 :root {
+  /* Defines the main green theme color used throughout the UI */
   --main-green: #377e39;
 }
 
-/* Base Styling */
+/* ======================
+   BASE STYLING
+   ====================== */
+
+/* Applies a clean system font stack */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
+  /* Sets a soft greenish background */
   background-color: #f5f8f7;
+  /* Uses a dark neutral text color */
   color: #1a1a1a;
+  /* Removes default margin and padding */
   margin: 0;
   padding: 0;
 }
 
-/* Modal Overlay */
+/* ======================
+   MODAL OVERLAY STYLING
+   ====================== */
+
+/* Covers the entire screen with a semi-transparent modal overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  /* Combines a white overlay with a centered background image */
   background: linear-gradient(
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.7)
     ),
     url("assets/images/background_popup.png") center/cover no-repeat;
+  /* Centers modal content both vertically and horizontally */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Ensures it's on top of everything else */
   z-index: 9999;
 }
 
+/* Styles the inner modal box */
 .modal-content {
   background: #fff;
   width: 90%;
   max-width: 500px;
+  /* Centers the box using absolute positioning and transform */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* Rounds corners and adds a subtle shadow */
   border-radius: 15px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Layout Container */
+/* ======================
+   LAYOUT CONTAINER
+   ====================== */
+
+/* Restricts maximum width of main layout */
 .container {
   max-width: 900px;
 }
 
-/* Typography */
+/* ======================
+   TYPOGRAPHY STYLING
+   ====================== */
+
+/* Applies green color to major headings */
 h1,
 h3,
 h4 {
   color: var(--main-green);
 }
 
+/* Slightly bold and gray the clock display */
 #clock {
   font-weight: 500;
   color: #444;
 }
 
+/* Makes the remaining time text lighter and smaller */
 #remainingTime {
   font-weight: 400;
   color: #888;
 }
 
-/* Card Styling */
+/* ======================
+   CARD STYLING
+   ====================== */
+
+/* Stylse general card components (e.g., task input form) */
 .card {
   background: #fff;
   border: 1px solid #e5e5e5;
@@ -76,7 +112,11 @@ h4 {
   max-width: 100%;
 }
 
-/* Task Items */
+/* ======================
+   TASK ITEM STYLING
+   ====================== */
+
+/* Styles individual task items */
 .task-item {
   background: #fff;
   border: 1px solid #eee;
@@ -89,6 +129,7 @@ h4 {
   gap: 0.5rem;
 }
 
+/* Styles task name text inside task-item */
 .task-item span {
   flex-grow: 1;
   font-size: 1rem;
@@ -96,12 +137,17 @@ h4 {
   margin-right: 1rem;
 }
 
+/* Styles muted description text inside task-item */
 .task-item .text-muted {
   font-size: 0.85rem;
   margin-left: 0.25rem;
 }
 
-/* Done Task Styling */
+/* ======================
+   DONE TASK STYLING
+   ====================== */
+
+/* Styles list items for completed tasks */
 #doneList li {
   background-color: #ebf9ec;
   color: #2c6e3f;
@@ -109,11 +155,16 @@ h4 {
   font-weight: 500;
 }
 
-/* Buttons */
+/* ======================
+   BUTTON STYLING
+   ====================== */
+
+/* Prevents icons inside buttons from capturing pointer events */
 button i {
   pointer-events: none;
 }
 
+/* Styles control buttons in each task item */
 .task-item .btn {
   padding: 0.4rem;
   width: 36px;
@@ -125,51 +176,65 @@ button i {
   margin-left: 0.2rem;
 }
 
+/* Sets icon size inside task buttons */
 .task-item .btn i {
   font-size: 1rem;
 }
 
+/* Sets main green color for success and primary buttons */
 .btn-success,
 .btn-primary {
   background-color: var(--main-green);
   border-color: var(--main-green);
 }
 
+/* Darkens buttons slightly on hover */
 .btn-success:hover,
 .btn-primary:hover {
   background-color: #2f6b30;
   border-color: #2f6b30;
 }
 
+/* Styles outline-success buttons with green border and text */
 .btn-outline-success {
   color: var(--main-green);
   border-color: var(--main-green);
 }
 
+/* Fills outline-success button with green background on hover */
 .btn-outline-success:hover {
   background-color: var(--main-green);
   color: #fff;
 }
 
+/* Styles yellow warning buttons */
 .btn-warning {
   background-color: #ffc107;
   border-color: #ffc107;
 }
 
+/* Darkens yellow buttons on hover */
 .btn-warning:hover {
   background-color: #e0a800;
   border-color: #d39e00;
 }
 
+/* Sets appearance of outline-secondary buttons */
 .btn-outline-secondary {
   border-color: #ccc;
   color: #666;
 }
 
+/* Lightens background on hover for outline-secondary buttons */
 .btn-outline-secondary:hover {
   background-color: #f1f1f1;
 }
 
+/* ======================
+   LIST GROUP ITEMS
+   ====================== */
+
+/* Ensures white background for all list items */
 .list-group-item {
   background: #fff;
 }
