@@ -54,7 +54,25 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
 
 ## Preview
 
-> *(Insert screenshot of your UI here if desired)*
+### Front Page
+![Main Dashboard](assets/Preview/frontpage.png)
+*View your active tasks, clock, and remaining study time in a clean layout.*
+
+### Start Modal
+![Beginning of Session](assets/Preview/beginning.png)
+*Start your session by entering your name and planned study hours.*
+
+### To-Do Tasks
+![To-Do List](assets/Preview/todo.png)
+*Add new tasks with planned minutes and descriptions. Each task has timer and control buttons.*
+
+### Task Completion
+![Task Marked Done](assets/Preview/taskdone.png)
+*Mark tasks as completed and see them moved into the Done section with styling.*
+
+### 💬 Motivational Quote
+![Motivational Modal](assets/Preview/quote.png)
+*After completing a task, get inspired with a random motivational quote.*
 
 ---
 
