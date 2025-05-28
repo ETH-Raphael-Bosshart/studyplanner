@@ -1,17 +1,17 @@
 # 📚 Study Task Manager
 
-The **Study Task Manager** is a lightweight yet functional web app designed to help students structure and monitor their daily study sessions. It combines task planning, real-time tracking, and motivational support in one elegant interface — with no login, no distraction.
+The **Study Task Manager** is a lightweight yet functional web app designed to help students structure and monitor their daily study sessions. It combines task planning, real-time tracking, and motivational support in one elegant interface.
 
 ---
 
 ## 🚀 Features
 
-### ✅ Start a Study Session
+### Start a Study Session
 - Input your **name** and **planned hours** (max 24h).
 - The app checks if your planned time fits within today.
 - Displays a personal welcome and study time countdown.
 
-### 📝 Task Management
+### Task Management
 - Add tasks with:
   - **Title**
   - **Planned minutes**
@@ -21,20 +21,16 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
 - Mark tasks as **Done** when completed.
 - View completed tasks in a **Done** section.
 
-### ⏱ Time & Tracking
+### Time & Tracking
 - Live **clock** in the top corner.
 - Remaining study time is updated in real time.
-- Each task tracks **actual used time** if the timer was used.
 
-### 🎯 Motivation & Quotes
+### Motivation & Quotes
 - After completing a task, a **random motivational quote** is shown.
-- Quotes are read from a local `quotes.csv` file.
 
-### 📁 Export & Import
+### Export
 - **Download** your study session as an Excel file:
   - Includes all tasks, minutes, descriptions, timestamps.
-- **Upload** a previous session file to restore progress.
-
 ---
 
 ## 💡 Technologies Used
