@@ -87,7 +87,6 @@ After completing a task, the app shows a motivational quote. These quotes provid
 
 ## About
 
-Done by Raphael Philipp Bosshart.
-This project was created as part of the lecture: *Skills: Programming with Advanced Computer Languages* in help of ChatGPT. 
+Done by Raphael Philipp Bosshart as part of the lecture: *Skills: Programming with Advanced Computer Languages* in help of ChatGPT. 
 
 
