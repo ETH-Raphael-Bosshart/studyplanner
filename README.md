@@ -30,7 +30,7 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
 
 ### Export
 - **Download** your study session as an Excel file:
-  - Includes all tasks, minutes, descriptions, timestamps.
+  - Includes all tasks, minutes and descriptions.
 ---
 
 ## Technologies Used
