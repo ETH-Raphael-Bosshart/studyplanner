@@ -56,23 +56,23 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
 
 ### Front Page
 ![Main Dashboard](assets/Preview/frontpage.png)
-*View your active tasks, clock, and remaining study time in a clean layout.*
+On this screen, the user begins by entering their name and the number of hours they plan to study today. This step is required to unlock the task manager and ensures time tracking starts with clear intent.
 
 ### Start Modal
 ![Beginning of Session](assets/Preview/beginning.png)
-*Start your session by entering your name and planned study hours.*
+Once the session starts, the user is able to add tasks using a simple form. Each task includes a name, a planned time in minutes, and an optional description. The system also shows a live clock and the remaining planned time in the corner.
 
 ### To-Do Tasks
 ![To-Do List](assets/Preview/todo.png)
-*Add new tasks with planned minutes and descriptions. Each task has timer and control buttons.*
+Tasks appear in the To-Do list with action buttons. The user can start a timer, pause, edit, or mark the task as done. The timer counts down in real time, helping the user stay focused and on track with their planned duration.
 
 ### Task Completion
 ![Task Marked Done](assets/Preview/taskdone.png)
-*Mark tasks as completed and see them moved into the Done section with styling.*
+When a task is marked as done, it is moved to the Done Tasks list. This area lets the user review what they have accomplished during the session. Each entry shows the task details and confirms its completion.
 
 ### 💬 Motivational Quote
 ![Motivational Modal](assets/Preview/quote.png)
-*After completing a task, get inspired with a random motivational quote.*
+After completing a task, the app shows a motivational quote. These quotes provide encouragement and help the user reset mentally before starting the next task. The quotes are randomly selected from a preloaded list.
 
 ---
 
