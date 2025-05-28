@@ -1,10 +1,10 @@
-# 📚 Study Task Manager
+# Study Task Manager
 
 The **Study Task Manager** is a lightweight yet functional web app designed to help students structure and monitor their daily study sessions. It combines task planning, real-time tracking, and motivational support in one elegant interface.
 
 ---
 
-## 🚀 Features
+## Features
 
 ### Start a Study Session
 - Input your **name** and **planned hours** (max 24h).
@@ -33,7 +33,7 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
   - Includes all tasks, minutes, descriptions, timestamps.
 ---
 
-## 💡 Technologies Used
+## Technologies Used
 
 - HTML, CSS, JavaScript
 - [Bootstrap 5](https://getbootstrap.com/)
@@ -42,34 +42,34 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
 
 ---
 
-## 🧠 Usage
+## Usage
 
 1. Open `index.html` in a browser.
 2. Enter your name and planned hours.
 3. Add tasks and start working.
-4. Stop and complete tasks, reflect on progress.
-5. Export your session, or import it next time to continue.
+4. Stop and complete tasks.
+5. Export your session.
 
 ---
 
-## 📷 Preview
+## Preview
 
 > *(Insert screenshot of your UI here if desired)*
 
 ---
 
-## 🔧 Optional Extensions
+## Optional Extensions
 
 - Add **weekly stats dashboard**
+- Add feature to change "totalPlannedMinutes"
 - Tag tasks (e.g. “Math”, “Reading”)
 - Add **dark mode**
-- Use `localStorage` to persist sessions without files
 
 ---
 
-## 🌍 About
+## About
 
-This project was created as part of a UNU student initiative to promote **structured learning**, **digital self-reflection**, and **intrinsic motivation** in education.
+This project was created as part of the lecture: *Skills: Programming with Advanced Computer Languages* in help of ChatGPT. 
 
 ---
 
