@@ -151,7 +151,7 @@ function startSession() {
   // Displays a personalized welcome message
   document.getElementById(
     "welcomeMessage"
-  ).textContent = `Welcome, ${studentName}!`;
+  ).textContent = `Welcome ${studentName}!`;
 
   // Updates the display for remaining planned time
   updateRemainingTime();
@@ -472,14 +472,14 @@ function downloadSession() {
   const data = [
     { Name: studentName }, // First row for user identification
     ...doneTasks.map((task) => ({
-      Status: "Done", // Mark as completed
+      Status: "Completed tasks", // Mark as completed
       Task: task.name, // Task title
       Minutes: task.minutes, // Planned minutes
       CompletedTime: task.completedTimeFormatted || "", // ISO string of when it was completed
       Description: task.description || "", // Optional task notes
     })),
     ...tasks.map((task) => ({
-      Status: "To-Do", // Task still pending
+      Status: "Pending tasks", // Task still pending
       Task: task.name,
       Minutes: task.minutes,
       CompletedTime: "", // Not yet completed
