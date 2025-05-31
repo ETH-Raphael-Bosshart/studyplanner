@@ -89,4 +89,12 @@ After completing a task, the app shows a motivational quote. These quotes provid
 
 Done by Raphael Philipp Bosshart as part of the lecture: *Skills: Programming with Advanced Computer Languages* in help of ChatGPT. 
 
+---
+
+## Quote source
+
+Motivational quotes are randomly selected from a dataset.  
+Full dataset available on [Kaggle: Quotes 500k](https://www.kaggle.com/datasets/manann/quotes-500k).
+
+
 
