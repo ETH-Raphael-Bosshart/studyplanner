@@ -91,10 +91,10 @@ Done by Raphael Philipp Bosshart as part of the lecture: *Skills: Programming wi
 
 ---
 
-## Quote source
+## Sources
 
-Motivational quotes are randomly selected from a dataset.  
-Full dataset available on [Kaggle: Quotes 500k](https://www.kaggle.com/datasets/manann/quotes-500k).
+- Quotes used are based on the public dataset: [Quotes 500k – Kaggle](https://www.kaggle.com/datasets/manann/quotes-500k)  
+- Favicon was created using: [Favicon.io Generator](https://favicon.io/favicon-generator/)
 
 
 
