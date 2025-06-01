@@ -17,16 +17,16 @@ The **Study Task Manager** is a functional web application designed to help stud
   - **Planned minutes**
   - Optional **description**
 - View tasks in a clean **Pending tasks** section.
-- Start/stop a **timer** for each task.
-- Mark tasks as **Done** when completed.
+- Start/stop a timer for each task.
+- Mark tasks as Done when completed.
 - View completed tasks in a **Completed tasks** section.
 
 ### Time & Tracking
-- Live **clock** in the top corner.
+- Live clock in the top corner.
 - Remaining study time is updated in real time.
 
 ### Motivation & Quotes
-- After completing a task, a **random motivational quote** is shown.
+- After completing a task, a random motivational **quote** is shown.
 
 ### Export
 - **Download** your study session as an Excel file:
@@ -44,11 +44,20 @@ The **Study Task Manager** is a functional web application designed to help stud
 
 ## Usage
 
-1. Open `index.html` in a browser.
-2. Enter your name and planned hours.
-3. Add tasks and start working.
-4. Stop and complete tasks.
-5. Export your session.
+1. **Launch the App**  
+   Open `index.html` in your preferred browser.
+
+2. **Start Your Session**  
+   Enter your name and planned study hours, then click **Start Session** to begin.
+
+3. **Add Tasks**  
+   Create tasks by entering a name, setting the estimated minutes, and (optionally) adding a short description.
+
+4. **Manage Tasks**  
+   Use the control buttons to **start**, **pause**, **edit**, or **complete** tasks as you progress.
+
+5. **Wrap Up**  
+   Once you're done, click **Download Session Summary** to export your study log as an Excel file.
 
 ---
 
