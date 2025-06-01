@@ -31,14 +31,6 @@ The **Study Task Manager** is a functional web application designed to help stud
 ### Export
 - **Download** your study session as an Excel file:
   - Includes all tasks, minutes and descriptions.
----
-
-## Technologies used
-
-- HTML, CSS, JavaScript
-- [Bootstrap 5](https://getbootstrap.com/)
-- [SheetJS](https://sheetjs.com/) (for Excel export/import)
-- [PapaParse](https://www.papaparse.com/) (for CSV quotes)
 
 ---
 
@@ -86,6 +78,15 @@ Finally, users can refine the task description. For example, by adding substeps 
 ### 💬 Motivational quote
 After completing a task, it is moved to the Done Tasks list and the app shows a motivational quote. These quotes provide encouragement and help the user reset mentally before starting the next task. The quotes are randomly selected from a preloaded list.
 ![Motivational Modal](assets/preview/quote.png)
+
+---
+
+## Technologies used
+
+- HTML, CSS, JavaScript
+- [Bootstrap 5](https://getbootstrap.com/)
+- [SheetJS](https://sheetjs.com/) (for Excel export/import)
+- [PapaParse](https://www.papaparse.com/) (for CSV quotes)
 
 ---
 
