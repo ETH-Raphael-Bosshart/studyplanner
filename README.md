@@ -1,4 +1,4 @@
-# Study Task Manager
+# ![Logo](assets/images/logo-small.png) Study Task Manager
 
 The **Study Task Manager** is a lightweight yet functional web app designed to help students structure and monitor their daily study sessions. It combines task planning, real-time tracking, and motivational support in one elegant interface.
 
@@ -55,23 +55,23 @@ The **Study Task Manager** is a lightweight yet functional web app designed to h
 ## Preview
 
 ### Front page
-![Main Dashboard](assets/Preview/frontpage.png)
+![Main Dashboard](assets/preview/frontpage.png)
 On this screen, the user begins by entering their name and the number of hours they plan to study today. This step is required to unlock the task manager and ensures time tracking starts with clear intent.
 
 ### Start modal
-![Beginning of Session](assets/Preview/beginning.png)
+![Beginning of Session](assets/preview/beginning.png)
 Once the session starts, the user is able to add tasks using a simple form. Each task includes a name, a planned time in minutes, and an optional description. The system also shows a live clock and the remaining planned time in the corner.
 
 ### Pending tasks
-![To-Do List](assets/Preview/todo.png)
+![To-Do List](assets/preview/todo.png)
 Tasks appear in the To-Do list with action buttons. The user can start a timer, pause, edit, or mark the task as done. The timer counts down in real time, helping the user stay focused and on track with their planned duration.
 
 ### Completed tasks
-![Task Marked Done](assets/Preview/taskdone.png)
+![Task Marked Done](assets/preview/taskdone.png)
 When a task is marked as done, it is moved to the Done Tasks list. This area lets the user review what they have accomplished during the session. Each entry shows the task details and confirms its completion.
 
 ### 💬 Motivational quote
-![Motivational Modal](assets/Preview/quote.png)
+![Motivational Modal](assets/preview/quote.png)
 After completing a task, the app shows a motivational quote. These quotes provide encouragement and help the user reset mentally before starting the next task. The quotes are randomly selected from a preloaded list.
 
 ---
