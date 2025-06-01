@@ -64,7 +64,7 @@ Once the session starts, the user is able to add tasks using a simple form. Each
 ![Beginning of Session](assets/preview/beginning.png)
 
 ### Pending tasks
-Tasks appear in the To-Do list with action buttons. The user can start a timer, pause, edit, or mark the task as done. The timer counts down in real time, helping the user stay focused and on track with their planned duration.
+Tasks appear in the pending tasks list with action buttons. The user can start a timer, pause, edit, or mark the task as done. The timer counts down in real time, helping the user stay focused and on track with their planned duration.
 ![To-Do List](assets/preview/todo.png)
 
 ### Edit tasks
