@@ -1,6 +1,6 @@
 # ![Logo](assets/images/logo.png) Study Task Manager
 
-The **Study Task Manager** is a lightweight yet functional web app designed to help students structure and monitor their daily study sessions. It combines task planning, real-time tracking, and motivational support in one elegant interface.
+The **Study Task Manager** is a functional web application designed to help students structure and monitor their daily study sessions. It combines task planning, real-time tracking, and motivational support in one elegant and simple interface.
 
 ---
 
