@@ -8,7 +8,7 @@ The **Study Task Manager** is a functional web application designed to help stud
 
 ### Start a study session
 - Input your **name** and **planned hours** (max 24h).
-- The app checks if your planned time fits within today.
+- The application checks if your planned time fits within today.
 - Displays a personal welcome and study time countdown.
 
 ### Task management
@@ -55,33 +55,37 @@ The **Study Task Manager** is a functional web application designed to help stud
 ## Preview
 
 ### Front page
-![Main Dashboard](assets/preview/frontpage.png)
 On this screen, the user begins by entering their name and the number of hours they plan to study today. This step is required to unlock the task manager and ensures time tracking starts with clear intent.
+![Main Dashboard](assets/preview/frontpage.png)
 
 ### Start modal
-![Beginning of Session](assets/preview/beginning.png)
 Once the session starts, the user is able to add tasks using a simple form. Each task includes a name, a planned time in minutes, and an optional description. The system also shows a live clock and the remaining planned time in the corner.
+![Beginning of Session](assets/preview/beginning.png)
 
 ### Pending tasks
-![To-Do List](assets/preview/todo.png)
 Tasks appear in the To-Do list with action buttons. The user can start a timer, pause, edit, or mark the task as done. The timer counts down in real time, helping the user stay focused and on track with their planned duration.
+![To-Do List](assets/preview/todo.png)
 
-### Completed tasks
-![Task Marked Done](assets/preview/taskdone.png)
-When a task is marked as done, it is moved to the Done Tasks list. This area lets the user review what they have accomplished during the session. Each entry shows the task details and confirms its completion.
+### Edit tasks
+After adding a task, users can edit any task at any time by clicking on the pencil icon next to it. As shown here, clicking the icon opens a dialog where you can change the task name directly. This allows you to refine or rename tasks as needed.
+![To-Do List](assets/preview/editTaskName.png)
+Next, the planned minutes can be adjusted. This is helpful if users over- or underestimated the time needed for a task.
+![To-Do List](assets/preview/editTaskMinutes.png)
+Finally, users can refine the task description. For example, by adding substeps or clarifying notes to guide their focus while working.
+![To-Do List](assets/preview/editTaskDescription.png)
 
 ### 💬 Motivational quote
+After completing a task, it is moved to the Done Tasks list and the app shows a motivational quote. These quotes provide encouragement and help the user reset mentally before starting the next task. The quotes are randomly selected from a preloaded list.
 ![Motivational Modal](assets/preview/quote.png)
-After completing a task, the app shows a motivational quote. These quotes provide encouragement and help the user reset mentally before starting the next task. The quotes are randomly selected from a preloaded list.
 
 ---
 
 ## Optional extensions
 
-- Add **weekly stats dashboard**
+- Add weekly stats dashboard
 - Add feature to change "totalPlannedMinutes"
 - Tag tasks (e.g. “Math”, “Reading”)
-- Add **dark mode**
+- Add dark mode
 
 ---
 
