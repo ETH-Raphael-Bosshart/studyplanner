@@ -207,6 +207,7 @@ function addTask() {
   updateRemainingTime();
 }
 
+// Allows users to edit a task’s name, duration, and description — if the task is not currently running
 function editTask(index) {
   const task = tasks[index];
 
@@ -223,7 +224,7 @@ function editTask(index) {
 
   const newMinutes = parseInt(newMinutesInput);
 
-  // Validate inputs
+  // Validate inputs: name must be non-empty and minutes must be a positive number
   if (!newName || isNaN(newMinutes) || newMinutes <= 0) {
     alert("Invalid input. Task was not updated.");
     return;
@@ -244,6 +245,7 @@ function editTask(index) {
   task.description = newDescription.trim();
   task.remainingSeconds = newMinutes * 60;
 
+  // Refresh UI and remaining time tracker
   renderTasks();
   updateRemainingTime();
 }
