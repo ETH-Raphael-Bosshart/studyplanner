@@ -44,20 +44,20 @@ The **Study Task Manager** is a functional web application designed to help stud
 
 ## Usage
 
-1. **Launch the App**  
+1. **Launch the application**  
    Open `index.html` in your preferred browser.
 
-2. **Start Your Session**  
-   Enter your name and planned study hours, then click **Start Session** to begin.
+2. **Start your session**  
+   Enter your name and planned study hours, then click *Start session!* to begin.
 
-3. **Add Tasks**  
+3. **Add tasks**  
    Create tasks by entering a name, setting the estimated minutes, and (optionally) adding a short description.
 
-4. **Manage Tasks**  
-   Use the control buttons to **start**, **pause**, **edit**, or **complete** tasks as you progress.
+4. **Manage tasks**  
+   Use the control buttons to *start*, *pause*, *edit*, or *complete* tasks as you progress.
 
-5. **Wrap Up**  
-   Once you're done, click **Download Session Summary** to export your study log as an Excel file.
+5. **Wrap up**  
+   Once you're done, click *Download session summary* to export your study log as an Excel file.
 
 ---
 
